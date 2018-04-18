@@ -13,7 +13,7 @@ backup mysql using innobackupex
 ### `innobackupex_parallel`
 - Default value: **3**
 
-### `innobackupex_destination`
+### `innobackupex_rebuild_threads`
 - Default value: **3**
 
 ## Example
