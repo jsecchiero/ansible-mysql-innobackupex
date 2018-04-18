@@ -5,6 +5,7 @@ backup mysql using innobackupex
 ## Role Variables
 
 ### `innobackupex_source_server`
+- Description: you must have ssh passwordless access
 - Default value: **no**
 
 ### `innobackupex_destination`
