@@ -1,0 +1,20 @@
+---
+
+- name: install percona mysql repo
+  shell: wget https://repo.percona.com/apt/percona-release_0.1-4.$(lsb_release -sc)_all.deb && dpkg -i percona-release_0.1-4.$(lsb_release -sc)_all.deb
+  args:
+    creates: /etc/apt/sources.list.d/percona-release.list
+    executable: /bin/bash
+    chdir: /tmp
+
+- name: install xtrabackup
+  package: name=percona-xtrabackup-24
+
+- name: create "{{ innobackupex_destination }}"
+  file: path="{{ innobackupex_destination }}" state=directory
+
+- name: create a copy from master
+  shell: >
+    ssh "{{ innobackupex_source_server }}" 'innobackupex --parallel="{{ innobackupex_parallel }}" --rebuild-threads="{{ innobackupex_rebuild_threads }}" --no-timestamp --slave-info --stream=xbstream ./' | xbstream -x && innobackupex --parallel="{{ innobackupex_parallel }}" --rebuild-threads="{{ innobackupex_rebuild_threads }}" --no-timestamp --apply-log "{{ mysql_datadir }}"
+  args:
+    chdir: "{{ innobackupex_destination }}"

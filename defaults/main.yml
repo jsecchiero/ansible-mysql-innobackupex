@@ -1,0 +1,6 @@
+---
+
+#innobackupex_source_server: source_ssh_server
+#innobackupex_destination: destination_folder
+innobackupex_parallel: 3
+innobackupex_rebuild_threads: 3
