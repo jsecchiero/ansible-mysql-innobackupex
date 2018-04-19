@@ -15,6 +15,6 @@
 
 - name: create a copy from master
   shell: >
-    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p "{{ innobackupex_ssh_port}}" "{{ innobackupex_source_server }}" 'innobackupex --parallel="{{ innobackupex_parallel }}" --rebuild-threads="{{ innobackupex_rebuild_threads }}" --no-timestamp --slave-info --stream=xbstream ./' | xbstream -x && innobackupex --parallel="{{ innobackupex_parallel }}" --rebuild-threads="{{ innobackupex_rebuild_threads }}" --no-timestamp --apply-log "{{ innobackupex_destination }}"
+    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p "{{ innobackupex_ssh_port }}" "{{ innobackupex_source_server }}" 'innobackupex --parallel="{{ innobackupex_parallel }}" --rebuild-threads="{{ innobackupex_rebuild_threads }}" --no-timestamp --slave-info --stream=xbstream ./' | xbstream -x && innobackupex --parallel="{{ innobackupex_parallel }}" --rebuild-threads="{{ innobackupex_rebuild_threads }}" --no-timestamp --apply-log "{{ innobackupex_destination }}"
   args:
     chdir: "{{ innobackupex_destination }}"
