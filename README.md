@@ -22,7 +22,7 @@ backup mysql using innobackupex
 - name: copy master mysql data
   hosts: 127.0.0.1
   roles:
-    - role: jsecchiero.ansible-mysql-innobackupex
+    - role: jsecchiero.mysql-innobackupex
       innobackupex_source_server: 1.1.1.1
       innobackupex_destination: /mnt/backup
 ```
